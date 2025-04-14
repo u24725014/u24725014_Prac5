@@ -1,0 +1,105 @@
+﻿@* Interface Enumarable = Enumarate or list (to ascertain the number of : count) *@
+
+@model IEnumerable<S1L04.Models.PersonModel>
+
+@{
+    ViewBag.Title = "List of People";
+}
+
+<h2>List of People</h2>
+
+
+<!-- Search box -->
+<input type="text" id="searchBox" placeholder="Search by First Name" class="form-control mb-3" />
+
+<!-- Action buttons -->
+<button onclick="saveToStorage()" class="btn btn-success">Save to LocalStorage (JSON)</button>
+<button onclick="loadFromStorage()" class="btn btn-primary">Load from LocalStorage</button>
+<button onclick="clearStorage()" class="btn btn-danger">Clear LocalStorage</button>
+
+<br />
+<br />
+
+<table class="table table-bordered" id="peopleTable">
+    <thead>
+        <tr style="background-color: darkgreen; color: white;">
+            <th>@Html.DisplayNameFor(model => model.First().StuNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.First().FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.First().LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StuNumber</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        // SEARCH FUNCTION
+        document.getElementById("searchBox").addEventListener("input", function () {
+            const search = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#peopleTable tbody tr");
+
+            rows.forEach(row => {
+                const firstName = row.cells[1].textContent.toLowerCase();
+                if (firstName.includes(search) && search !== "") {
+                    row.style.color = "red";
+                    setTimeout(() => row.style.color = "", 3000); // reset after 3 sec
+                }
+            });
+        });
+
+        // SAVE TO LOCAL STORAGE
+        function saveToStorage() {
+            const rows = document.querySelectorAll("#peopleTable tbody tr");
+            const data = [];
+
+            rows.forEach(row => {
+                data.push({
+                    StuNumber: row.cells[0].textContent,
+                    FirstName: row.cells[1].textContent,
+                    LastName: row.cells[2].textContent,
+                    Email: row.cells[3].textContent
+                });
+            });
+
+            localStorage.setItem("peopleList", JSON.stringify(data));
+            alert("Saved to localStorage!");
+        }
+
+        // LOAD FROM LOCAL STORAGE
+        function loadFromStorage() {
+            const jsonData = localStorage.getItem("peopleList");
+            if (!jsonData) return;
+
+            const people = JSON.parse(jsonData);
+            const tbody = document.querySelector("#peopleTable tbody");
+            tbody.innerHTML = "";
+
+            people.forEach(p => {
+                const row = `<tr>
+                                <td>${p.StuNumber}</td>
+                                <td>${p.FirstName}</td>
+                                <td>${p.LastName}</td>
+                                <td>${p.Email}</td>
+                             </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        // CLEAR LOCAL STORAGE
+        function clearStorage() {
+            localStorage.removeItem("peopleList");
+            alert("LocalStorage cleared!");
+        }
+    </script>
+    }

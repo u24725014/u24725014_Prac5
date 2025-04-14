@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person 01</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #e8f3eb;
+            color: #2a4535;
+            line-height: 1.6;
+        }
+
+
+
+
+
+        section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid #1b5e20;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #a5d6a7;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background-color: #e8f5e9;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            margin: 0 5px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            transition: all 0.3s;
+            color: #2e7d32;
+        }
+
+            .tab-btn:hover {
+                background-color: #c8e6c9;
+            }
+
+            .tab-btn.active {
+                background-color: #1b5e20;
+                color: white;
+            }
+
+        .content-section {
+            display: none;
+            animation: fadeEffect 1s;
+        }
+
+            .content-section.active {
+                display: block;
+            }
+
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #a5d6a7;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .bio-content, .hobbies-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .bio-content, .hobbies-content {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .bio-content img, .hobbies-content img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 3px solid #2e7d32;
+        }
+
+        .bio-content p {
+            flex: 1;
+            background-color: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #388e3c;
+        }
+
+        ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #33691e;
+        }
+
+            li::marker {
+                color: #388e3c;
+            }
+
+        .semester-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .semester-container {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
+        .semester {
+            flex: 1;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid #388e3c;
+        }
+
+        nav {
+            background-color: black; /* Full black strip */
+            padding: 10px 0;
+            display: flex;
+            justify-content: center; /* Centers menu items */
+            width: 100%; /* Ensures full width */
+        }
+
+        /* NAVBAR STYLES */
+        nav {
+            background-color: black; /* Black strip */
+            padding: 10px 0;
+            display: flex;
+            justify-content: center; /* Centers the navbar */
+            gap: 15px; /* Spacing between items */
+        }
+
+            nav a {
+                text-decoration: none; /* Removes underline */
+                color: white; /* White text */
+                background-color: black; /* Background matches navbar */
+                padding: 15px 20px;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+                text-align: center;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+                nav a:hover {
+                    background-color: grey; /* Grey on hover */
+                }
+
+            nav .active {
+                background-color: green; /* Green for active tab */
+            }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../StudyGroupInsights/Index">LIST</a>
+        <a href="../HTML Pages/Person01.html" class="active">Person 1 </a>
+        <a href="../HTML Pages/Person02.html">Person 2</a>
+        <a href="../HTML Pages/Person03.html">Person 3</a>
+        <a href="../HTML Pages/Person04.html">Person 4</a>
+        <a href="../HTML Pages/Person05.html">Person 5</a>
+        <a href="javascript:history.back()">Back</a>
+    </nav>
+
+    <section>
+        <!-- Tab Buttons -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="openTab(event, 'biography')">Biography</button>
+            <button class="tab-btn" onclick="openTab(event, 'hobbies')">Hobbies</button>
+            <button class="tab-btn" onclick="openTab(event, 'modules')">Modules</button>
+        </div>
+
+        <!-- Biography Section -->
+        <div id="biography" class="content-section active">
+            <h2>Background & Biography</h2>
+            <div class="bio-content">
+                <img src="../Images/Images/Nabeeha_backround.png" alt="Nabeeha's Picture">
+                <p>Nabeeha is a 19-year-old Informatics student at the University of Pretoria. She is passionate about technology, problem-solving, and coding. Known for her sharp wit and determination, she always strives for excellence in everything she does.</p>
+            </div>
+        </div>
+
+        <!-- Hobbies Section -->
+        <div id="hobbies" class="content-section">
+            <h2>Hobbies</h2>
+            <div class="hobbies-content">
+                <img src="../Images/Images/Nabeeha_hobby.jpeg" alt="Hobby Image">
+                <ul>
+                    <li>Coding cool projects</li>
+                    <li>Watching sci-fi and thriller movies</li>
+                    <li>Playing video games</li>
+                    <li>Trying out different coffee blends</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Modules Section -->
+        <div id="modules" class="content-section">
+            <h2>Registered Modules</h2>
+            <div class="semester-container">
+                <div class="semester">
+                    <h3>1st Semester</h3>
+                    <ul>
+                        <li>INF 171 - Informatics 171</li>
+                        <li>INF 164 - Informatics 164</li>
+                        <li>WTW 134 - Calculus 134</li>
+                    </ul>
+                </div>
+                <div class="semester">
+                    <h3>2nd Semester</h3>
+                    <ul>
+                        <li>INF 272 - Informatics 272</li>
+                        <li>STK 110 - Statistics 110</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function openTab(evt, tabName) {
+            var contentSections = document.getElementsByClassName("content-section");
+            for (var i = 0; i < contentSections.length; i++) {
+                contentSections[i].className = contentSections[i].className.replace(" active", "");
+            }
+
+            var tabButtons = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
